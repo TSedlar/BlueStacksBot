@@ -6,6 +6,8 @@ import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
 import me.sedlar.osmb.native.ExtGDI32
 import me.sedlar.osmb.native.hasPointer
+import org.opencv.core.CvType
+import org.opencv.core.Mat
 import java.awt.Color
 import java.awt.Rectangle
 import java.awt.Toolkit
@@ -29,105 +31,123 @@ const val WM_RBUTTONDBLCLK = 0x206
 const val WM_KEYDOWN = 0x100
 const val WM_KEYUP = 0x101
 
-class BlueStacks {
-    companion object {
+object BlueStacks {
 
-        const val GAME_WIDTH = 900
-        const val GAME_HEIGHT = 550
-        private val BLANK_IMAGE = BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_RGB)
+    const val GAME_WIDTH = 900
+    const val GAME_HEIGHT = 550
+    private val BLANK_IMAGE = BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_RGB)
 
-        private var canvasBounds: Rectangle? = null
+    private var canvasBounds: Rectangle? = null
 
-        val CANVAS_BOUNDS: Rectangle
-            get() = canvasBounds!!
+    val CANVAS_BOUNDS: Rectangle
+        get() = canvasBounds!!
 
-        private fun hasValidHandles(): Boolean {
-            return mainHandle != null && mainHandle!!.hasPointer() && winHandle != null && winHandle!!.hasPointer() &&
-                    canvasHandle != null && canvasHandle!!.hasPointer()
-        }
+    private fun hasValidHandles(): Boolean {
+        return mainHandle != null && mainHandle!!.hasPointer() && winHandle != null && winHandle!!.hasPointer() &&
+                canvasHandle != null && canvasHandle!!.hasPointer()
+    }
 
-        fun findHandles(): Boolean {
-            if (hasValidHandles()) {
-                return true
-            }
-
-            mainHandle = User32.INSTANCE.FindWindow(null, MAIN_NAME)
-            winHandle = User32.INSTANCE.FindWindowEx(mainHandle, WinDef.HWND(Pointer.NULL), WIN_NAME, null)
-            canvasHandle = User32.INSTANCE.FindWindowEx(winHandle, WinDef.HWND(Pointer.NULL), CANVAS_NAME, null)
-
-            if (!hasValidHandles()) {
-                return false
-            }
-
-            println("Main Handle: $mainHandle")
-            println("Win Handle: $winHandle")
-            println("Canvas Handle: $canvasHandle")
-
-            println("Setting window size...")
-
-            val screen = Toolkit.getDefaultToolkit().screenSize
-            val midX = (screen.width / 2) - (GAME_WIDTH / 2)
-            val midY = (screen.height / 2) - (GAME_HEIGHT / 2)
-
-            User32.INSTANCE.SetWindowPos(mainHandle, WinDef.HWND(Pointer.NULL), midX, midY, GAME_WIDTH, GAME_HEIGHT, 0)
-
-            val canvasRect = WinDef.RECT()
-
-            User32.INSTANCE.GetWindowRect(canvasHandle, canvasRect)
-
-            canvasBounds = canvasRect.toRectangle()
-
+    fun findHandles(): Boolean {
+        if (hasValidHandles()) {
             return true
         }
 
-        fun doSafeAction(action: () -> Unit) {
-            if (findHandles()) {
-                action()
-            }
+        mainHandle = User32.INSTANCE.FindWindow(null, MAIN_NAME)
+        winHandle = User32.INSTANCE.FindWindowEx(mainHandle, WinDef.HWND(Pointer.NULL), WIN_NAME, null)
+        canvasHandle = User32.INSTANCE.FindWindowEx(winHandle, WinDef.HWND(Pointer.NULL), CANVAS_NAME, null)
+
+        if (!hasValidHandles()) {
+            return false
         }
 
-        fun click(x: Int, y: Int, hold: Int = 0) {
-            doSafeAction {
-                val position = (y shl 16) or (x and 0xFFFF)
-                val w = WinDef.WPARAM(0)
-                val l = WinDef.LPARAM(position.toLong())
-                User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
-                if (hold > 0) {
-                    Thread.sleep(hold.toLong())
-                }
-                User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
-            }
-        }
+        println("Main Handle: $mainHandle")
+        println("Win Handle: $winHandle")
+        println("Canvas Handle: $canvasHandle")
 
-        fun snapshot(): BufferedImage {
-            var img = BLANK_IMAGE
-            doSafeAction {
-                img = GDI32Util.getScreenshot(canvasHandle)
-            }
-            return img
-        }
+        println("Setting window size...")
 
-        fun pixels(): IntArray {
-            var pixels = IntArray(0)
-            doSafeAction {
-                pixels = ExtGDI32.GetAllPixels(canvasHandle!!)
-            }
-            return pixels
-        }
+        val screen = Toolkit.getDefaultToolkit().screenSize
+        val midX = (screen.width / 2) - (GAME_WIDTH / 2)
+        val midY = (screen.height / 2) - (GAME_HEIGHT / 2)
 
-        fun colorAt(x: Int, y: Int): Color {
-            var color = Color.BLACK
-            doSafeAction {
-                val hdc = User32.INSTANCE.GetDC(canvasHandle)
-                val pixel = ExtGDI32.INSTANCE.GetPixel(hdc, x, y)
-                User32.INSTANCE.ReleaseDC(canvasHandle, hdc)
-                color = Color(
-                    (pixel and 0x000000FF),
-                    (pixel and 0x0000FF00) shr 8,
-                    (pixel and 0x00FF0000) shr 16
-                )
-            }
-            return color
+        User32.INSTANCE.SetWindowPos(mainHandle, WinDef.HWND(Pointer.NULL), midX, midY, GAME_WIDTH, GAME_HEIGHT, 0)
+
+        val canvasRect = WinDef.RECT()
+
+        User32.INSTANCE.GetWindowRect(canvasHandle, canvasRect)
+
+        canvasBounds = canvasRect.toRectangle()
+
+        return true
+    }
+
+    fun doSafeAction(action: () -> Unit) {
+        if (findHandles()) {
+            action()
         }
+    }
+
+    fun click(x: Int, y: Int, hold: Int = 0) {
+        doSafeAction {
+            val position = (y shl 16) or (x and 0xFFFF)
+            val w = WinDef.WPARAM(0)
+            val l = WinDef.LPARAM(position.toLong())
+            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
+            if (hold > 0) {
+                Thread.sleep(hold.toLong())
+            }
+            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
+        }
+    }
+
+    fun snapshot(): BufferedImage {
+        var img = BLANK_IMAGE
+        doSafeAction {
+            img = GDI32Util.getScreenshot(canvasHandle)
+        }
+        return img
+    }
+
+    fun pixels(): IntArray {
+        var pixels = IntArray(0)
+        doSafeAction {
+            pixels = ExtGDI32.GetAllPixels(canvasHandle!!)
+        }
+        return pixels
+    }
+
+    fun mat(): Mat {
+        var mat = Mat()
+        doSafeAction {
+            mat = Mat(canvasBounds!!.height, canvasBounds!!.width, CvType.CV_8UC3)
+
+            val pixels = OSMobileBot.pixels
+
+            val data = ByteArray(canvasBounds!!.width * canvasBounds!!.height * mat.elemSize().toInt())
+
+            for (i in pixels.indices) {
+                data[i * 3] = (pixels[i] shr 0 and 0xFF).toByte() // r
+                data[i * 3 + 1] = (pixels[i] shr 8 and 0xFF).toByte() // g
+                data[i * 3 + 2] = (pixels[i] shr 16 and 0xFF).toByte() // b
+            }
+
+            mat.put(0, 0, data)
+        }
+        return mat
+    }
+
+    fun colorAt(x: Int, y: Int): Color {
+        var color = Color.BLACK
+        doSafeAction {
+            val hdc = User32.INSTANCE.GetDC(canvasHandle)
+            val pixel = ExtGDI32.INSTANCE.GetPixel(hdc, x, y)
+            User32.INSTANCE.ReleaseDC(canvasHandle, hdc)
+            color = Color(
+                (pixel and 0x000000FF),
+                (pixel and 0x0000FF00) shr 8,
+                (pixel and 0x00FF0000) shr 16
+            )
+        }
+        return color
     }
 }

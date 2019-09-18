@@ -4,6 +4,8 @@ import me.sedlar.osmb.BlueStacks
 import me.sedlar.osmb.OSMobileBot
 import me.sedlar.osmb.api.util.FX
 import me.sedlar.osmb.api.util.round
+import org.opencv.core.Mat
+import org.opencv.core.Rect
 import java.awt.Color
 import java.awt.Point
 import java.awt.Rectangle
@@ -23,10 +25,17 @@ class GameScreen {
         val PIXEL_HEIGHT: Int
             get() = BlueStacks.CANVAS_BOUNDS.width
 
+        val matrix: Mat
+            get() = OSMobileBot.matrix
+
         val player = PRect(47.78, 41.45, 4.67, 10.0)
 
         fun click(x: Int, y: Int, hold: Int = 0) {
             BlueStacks.click(x, y, hold)
+        }
+
+        fun click(point: Point) {
+            click(point.x, point.y)
         }
 
         fun px(percent: Double): Int {
@@ -82,50 +91,92 @@ class GameScreen {
         }
     }
 
-    class PRect(val px: Double, val py: Double, val pw: Double, val ph: Double) {
+    abstract class ScreenRegion(protected val px: Double, protected val py: Double) {
 
-        fun toScreen(): Rectangle {
+        val center: Point
+            get() {
+                val rect = toScreen()
+                return Point(rect.x + (rect.width / 2), rect.y + (rect.height / 2))
+            }
+
+        abstract fun toScreen(): Rectangle
+
+        fun toScreenX(): Int {
+            return px(px)
+        }
+
+        fun toScreenY(): Int {
+            return py(py)
+        }
+
+        fun toScreenCV(): Rect {
+            val rect = toScreen()
+            return Rect(rect.x, rect.y, rect.width, rect.height)
+        }
+
+        fun toMat(): Mat {
+            return matrix.submat(toScreenCV())
+        }
+
+        fun find(color: Color, tolerance: Int): List<Point> {
+            return find(color, tolerance, toScreen())
+        }
+    }
+
+    class PRect(px: Double, py: Double, private val pw: Double, private val ph: Double) : ScreenRegion(px, py) {
+
+        override fun toScreen(): Rectangle {
             return Rectangle(
-                px(px),
-                py(py),
+                toScreenX(),
+                toScreenY(),
                 px(pw),
                 py(ph)
             )
         }
-
-        fun center(): Point {
-            val rect = toScreen()
-            return Point(rect.x + (rect.width / 2), rect.y + (rect.height / 2))
-        }
-
-        fun find(color: Color, tolerance: Int): List<Point> {
-            return find(color, tolerance, toScreen())
-        }
     }
 
-    class PRegion(val px: Double, val py: Double, val w: Int, val h: Int) {
+    class PRegion(px: Double, py: Double, val w: Int, val h: Int) : ScreenRegion(px, py) {
 
-        fun toScreen(): Rectangle {
+        override fun toScreen(): Rectangle {
             return Rectangle(
-                px(px),
-                py(py), w, h
+                toScreenX(),
+                toScreenY(),
+                w,
+                h
             )
-        }
-
-        fun center(): Point {
-            val rect = toScreen();
-            return Point(rect.x + (rect.width / 2), rect.y + (rect.height / 2));
-        }
-
-        fun find(color: Color, tolerance: Int): List<Point> {
-            return find(color, tolerance, toScreen())
         }
     }
 }
 
-fun List<Point>.closestToPlayer(maxDist: Double = Double.MAX_VALUE, exclude: Boolean = false) : Point? {
+fun Rectangle.find(color: Color, tolerance: Int): List<Point> {
+    return GameScreen.find(color, tolerance, this)
+}
+
+val Rectangle.center: Point
+    get() = Point(this.centerX.toInt(), this.centerY.toInt())
+
+fun List<Rectangle>.closestToPlayer(maxDist: Double = Double.MAX_VALUE, exclude: Boolean = false): Rectangle? {
     val player = GameScreen.player.toScreen()
-    val center = GameScreen.player.center()
+    val center = GameScreen.player.center
+    val copy = this.toMutableList()
+
+    // Remove candidates
+    copy.removeIf { it.center.distance(center) > maxDist }
+
+    // Remove points on player
+    if (exclude) {
+        copy.removeIf { player.contains(it) }
+    }
+
+    // Sort by distance
+    copy.sortBy { it.center.distance(center) }
+
+    return copy.firstOrNull()
+}
+
+fun List<Point>.closestToPlayer(maxDist: Double = Double.MAX_VALUE, exclude: Boolean = false): Point? {
+    val player = GameScreen.player.toScreen()
+    val center = GameScreen.player.center
     val copy = this.toMutableList()
 
     // Remove candidates

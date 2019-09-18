@@ -10,11 +10,13 @@ import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import me.sedlar.osmb.api.core.Script
+import me.sedlar.osmb.native.OpenCVLoader
 import me.sedlar.osmb.scripts.EmptyScript
-import me.sedlar.osmb.scripts.TestScript
+import me.sedlar.osmb.scripts.TutorialCopper
 import me.sedlar.osmb.scripts.debug.ColorFinder
 import me.sedlar.osmb.scripts.debug.PRectMaker
 import me.sedlar.osmb.scripts.debug.TestDebug
+import org.opencv.core.Mat
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
@@ -31,7 +33,7 @@ class OSMobileBot : Application() {
 
         private val ALL_SCRIPTS = arrayOf(
             EmptyScript(),
-            TestScript()
+            TutorialCopper()
         )
 
         private val ALL_DEBUGS = arrayOf(
@@ -114,9 +116,13 @@ class OSMobileBot : Application() {
 
         private var drawnImage: BufferedImage? = null
         private var drawnPixels: IntArray = IntArray(0)
+        private var drawnMat = Mat()
 
         val pixels: IntArray
             get() = drawnPixels
+
+        val matrix: Mat
+            get() = drawnMat
 
         val canvas = object : JPanel() {
             override fun paintComponent(g: Graphics) {
@@ -267,6 +273,7 @@ class OSMobileBot : Application() {
         val pixelTask = object : TimerTask() {
             override fun run() {
                 drawnPixels = BlueStacks.pixels()
+                drawnMat = BlueStacks.mat()
             }
         }
 
@@ -312,6 +319,7 @@ class OSMobileBot : Application() {
 fun main() {
     object : Thread() {
         override fun run() {
+            OpenCVLoader.load()
             Application.launch(OSMobileBot::class.java)
         }
     }.start()

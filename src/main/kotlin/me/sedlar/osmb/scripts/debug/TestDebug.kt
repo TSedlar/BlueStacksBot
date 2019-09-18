@@ -5,7 +5,6 @@ import me.sedlar.osmb.api.game.GameScreen
 import me.sedlar.osmb.api.game.Inventory
 import java.awt.Color
 import java.awt.Graphics2D
-import java.awt.Rectangle
 
 class TestDebug : Script() {
 

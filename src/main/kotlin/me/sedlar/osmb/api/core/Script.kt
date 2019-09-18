@@ -3,7 +3,6 @@ package me.sedlar.osmb.api.core
 import javafx.scene.layout.Pane
 import me.sedlar.osmb.OSMobileBot
 import java.awt.Graphics2D
-import java.util.concurrent.TimeUnit
 import javax.swing.JPanel
 
 abstract class Script : Runnable {
@@ -43,10 +42,6 @@ abstract class Script : Runnable {
 
     fun interrupt() {
         isInterrupted = true
-    }
-
-    fun now() : Long {
-        return TimeUnit.NANOSECONDS.toMillis(System.nanoTime())
     }
 
     open fun createUI(parent: Pane) {}
