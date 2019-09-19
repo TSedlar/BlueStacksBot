@@ -3,6 +3,7 @@ package me.sedlar.osmb.api.game
 import me.sedlar.osmb.BlueStacks
 import me.sedlar.osmb.OSMobileBot
 import me.sedlar.osmb.api.util.FX
+import me.sedlar.osmb.api.util.offset
 import me.sedlar.osmb.api.util.round
 import org.opencv.core.Mat
 import org.opencv.core.Rect
@@ -29,6 +30,10 @@ class GameScreen {
             get() = OSMobileBot.matrix
 
         val player = PRect(47.78, 41.45, 4.67, 10.0)
+
+        fun center(): Point {
+            return Point(WIDTH / 2, HEIGHT / 2)
+        }
 
         fun click(x: Int, y: Int, hold: Int = 0) {
             BlueStacks.click(x, y, hold)
@@ -121,6 +126,10 @@ class GameScreen {
         fun find(color: Color, tolerance: Int): List<Point> {
             return find(color, tolerance, toScreen())
         }
+
+        fun click(offset: Int) {
+            click(center.offset(offset))
+        }
     }
 
     class PRect(px: Double, py: Double, private val pw: Double, private val ph: Double) : ScreenRegion(px, py) {
@@ -144,6 +153,17 @@ class GameScreen {
                 w,
                 h
             )
+        }
+    }
+
+    class PPoint(private val px: Double, private val py: Double) {
+
+        fun toScreen(): Point {
+            return Point(px(px), py(py))
+        }
+
+        fun click() {
+            click(toScreen())
         }
     }
 }

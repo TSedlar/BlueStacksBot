@@ -26,6 +26,8 @@ interface ExtGDI32 : GDI32 {
 
             val hdcTarget = User32.INSTANCE.GetDC(target) ?: throw Win32Exception(Native.getLastError())
 
+            User32Ext.INSTANCE.PrintWindow(target, hdcTarget, 0)
+
             var we: Win32Exception? = null
 
             // device context used for drawing

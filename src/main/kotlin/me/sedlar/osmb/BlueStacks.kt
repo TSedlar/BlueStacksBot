@@ -4,7 +4,12 @@ import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.GDI32Util
 import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
+import com.sun.jna.platform.win32.WinDef.LPARAM
+import com.sun.jna.platform.win32.WinDef.WPARAM
+import com.sun.jna.platform.win32.WinUser.SWP_NOMOVE
+import com.sun.jna.platform.win32.WinUser.SWP_NOSIZE
 import me.sedlar.osmb.native.ExtGDI32
+import me.sedlar.osmb.native.Windows10
 import me.sedlar.osmb.native.hasPointer
 import org.opencv.core.CvType
 import org.opencv.core.Mat
@@ -12,6 +17,7 @@ import java.awt.Color
 import java.awt.Rectangle
 import java.awt.Toolkit
 import java.awt.image.BufferedImage
+
 
 private var mainHandle: WinDef.HWND? = null
 private var winHandle: WinDef.HWND? = null
@@ -30,6 +36,10 @@ const val WM_RBUTTONUP = 0x205
 const val WM_RBUTTONDBLCLK = 0x206
 const val WM_KEYDOWN = 0x100
 const val WM_KEYUP = 0x101
+const val WM_MOUSEWHEEL = 0x020A
+const val WM_MOUSEMOVE = 0x0200
+const val WM_SETCURSOR = 0x0020
+const val WM_CHAR = 0x0102
 
 object BlueStacks {
 
@@ -72,6 +82,8 @@ object BlueStacks {
 
         User32.INSTANCE.SetWindowPos(mainHandle, WinDef.HWND(Pointer.NULL), midX, midY, GAME_WIDTH, GAME_HEIGHT, 0)
 
+        Thread.sleep(1000)
+
         val canvasRect = WinDef.RECT()
 
         User32.INSTANCE.GetWindowRect(canvasHandle, canvasRect)
@@ -79,6 +91,14 @@ object BlueStacks {
         canvasBounds = canvasRect.toRectangle()
 
         return true
+    }
+
+    fun focus() {
+        User32.INSTANCE.SetForegroundWindow(mainHandle)
+    }
+
+    fun sendToVirtualDesktop() {
+        Windows10.moveToNewDesktop(mainHandle!!)
     }
 
     fun doSafeAction(action: () -> Unit) {
@@ -90,13 +110,36 @@ object BlueStacks {
     fun click(x: Int, y: Int, hold: Int = 0) {
         doSafeAction {
             val position = (y shl 16) or (x and 0xFFFF)
-            val w = WinDef.WPARAM(0)
-            val l = WinDef.LPARAM(position.toLong())
+            val w = WPARAM(0)
+            val l = LPARAM(position.toLong())
             User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
             if (hold > 0) {
                 Thread.sleep(hold.toLong())
             }
             User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
+        }
+    }
+
+    fun sendKey(keyCode: Int, scanCode: Int, wait: Int = 0) {
+        doSafeAction {
+            val activeWin = User32.INSTANCE.GetForegroundWindow()
+            User32.INSTANCE.SetForegroundWindow(mainHandle) // sadly has to be focused to send keys..
+            Thread.sleep(500)
+            val wparam = WPARAM(keyCode.toLong())
+            val lParam = 0x00000001 or (scanCode /* scancode */ shl 16) or 0x01000000 /* extended */
+            val lparamDown = LPARAM(lParam.toLong())
+            val lparamUp = LPARAM((lParam or (1 shl 30) or (1 shl 31)).toLong())
+            User32.INSTANCE.PostMessage(winHandle, WM_KEYDOWN, wparam, lparamDown)
+            User32.INSTANCE.PostMessage(winHandle, WM_KEYUP, wparam, lparamUp)
+            Thread.sleep(250)
+            // send to back
+            val bottom = WinDef.HWND(Pointer.createConstant(1))
+            User32.INSTANCE.SetWindowPos(
+                mainHandle, bottom, 0, 0, 0, 0,
+                SWP_NOSIZE or SWP_NOMOVE
+            )
+            Thread.sleep(wait.toLong())
+            User32.INSTANCE.SetForegroundWindow(activeWin)
         }
     }
 

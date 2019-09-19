@@ -11,6 +11,7 @@ import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.Rectangle
 import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 import kotlin.random.Random.Default.nextLong
 
 class TutorialCopper : Script() {
@@ -29,37 +30,66 @@ class TutorialCopper : Script() {
     }
 
     override fun onStart() {
-        COPPER_ROCK = OpenCV.normModelRange("./src/main/resources/models/copper", 1..8, 0.7)
-        COPPER_ORE = OpenCV.mat("./src/main/resources/models/copper_ore/1.png") to 0.90
+        COPPER_ROCK = OpenCV.normModelRange("copper", 1..8, 0.75)
+        COPPER_ORE = OpenCV.mat("copper_ore/1.png") to 0.85
     }
 
     override fun onStop() {
         matches.clear()
     }
 
+    override fun setup(): Boolean {
+        if (!GameState.setCamZoom(3)) {
+            return false
+        }
+        if (!GameState.setBrightness(2)) {
+            return false
+        }
+        return true
+    }
+
     override fun loop(): Int {
-
-        if (Inventory.isFull()) {
-            val copperSlots = Inventory.findAllSlots(COPPER_ORE!!)
-
-            BotConsole.println("Dropping ${copperSlots.size} copper")
-
-            matches.clear()
-
-            copperSlots.forEach {
-                matches.add(it.toScreen() to true)
+        return when {
+            !Inventory.viewing() -> {
+                Inventory.open()
+                nextInt(500, 750)
             }
-
-            copperSlots.forEach {
-                GameScreen.click(it.center.offset(10))
-                Thread.sleep(Random.nextLong(180, 300))
+            Inventory.isFull() -> {
+                dropCopper()
+                nextInt(50, 75)
             }
+            else -> {
+                mineCopper()
+                nextInt(50, 75)
+            }
+        }
+    }
 
-            return Random.nextInt(50, 75)
+    private fun dropCopper() {
+        if (!GameState.isDropMode()) {
+            GameState.setDropMode(true)
+            return
         }
 
+        val copperSlots = Inventory.findAllSlots(COPPER_ORE!!)
+
+        BotConsole.println("Dropping ${copperSlots.size} copper")
+
+        matches.clear()
+
+        copperSlots.forEach {
+            matches.add(it.toScreen() to true)
+        }
+
+        copperSlots.forEach {
+            GameScreen.click(it.center.offset(10))
+            Thread.sleep(nextLong(180, 300))
+        }
+    }
+
+    private fun mineCopper() {
         val localMatches = VIEWPORT.toMat().findAllTemplates(*COPPER_ROCK.toTypedArray()).shift(VIEWPORT)
-        val validMatches = localMatches.filter { it.find(INVALID_ROCK, INVALID_ROCK_TOLERANCE).size < 10 }
+        val validMatches = localMatches.filter { it.find(INVALID_ROCK, INVALID_ROCK_TOLERANCE).size < 5 }
 
         matches.clear()
 
@@ -69,16 +99,14 @@ class TutorialCopper : Script() {
             }
         }
 
-        localMatches.closestToPlayer(50.0)?.let { nearest ->
+        validMatches.closestToPlayer(50.0)?.let { nearest ->
             GameScreen.click(nearest.center.offset(10))
             waitFor(5000) {
-                return@waitFor nearest.find(INVALID_ROCK, INVALID_ROCK_TOLERANCE).size >= 10
+                return@waitFor nearest.find(INVALID_ROCK, INVALID_ROCK_TOLERANCE).size >= 5
             }.pass {
                 Thread.sleep(nextLong(50, 100))
             }
         }
-
-        return 20
     }
 
     override fun drawDebug(g: Graphics2D) {

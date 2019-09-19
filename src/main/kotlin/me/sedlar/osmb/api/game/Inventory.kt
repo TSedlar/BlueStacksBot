@@ -100,4 +100,10 @@ object Inventory {
         }
         return matches
     }
+
+    fun viewing(): Boolean = GameState.isInvOpen()
+
+    fun open() {
+        GameState.INV_TAB_BOUNDS.click(10)
+    }
 }

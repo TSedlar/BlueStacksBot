@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-padding: 0; -fx-background-color: #303030;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.201">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-padding: 0; -fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1100.0">
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="1100.0">
                <children>
-                  <Pane id="image-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="900.0" style="-fx-background-color: #000000;" HBox.hgrow="NEVER">
+                  <Pane id="image-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="900.0" style="-fx-background-color: #000000;" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -28,7 +28,7 @@
                         <SwingNode id="canvas" />
                      </children>
                   </Pane>
-                  <TabPane id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="195.0" side="RIGHT" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="195.0" side="RIGHT" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab id="script-tab" closable="false" text="Scripts">
                         <content>
@@ -36,7 +36,7 @@
                                  <children>
                                     <VBox alignment="CENTER" layoutX="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="506.0" prefWidth="160.0">
                                        <children>
-                                          <ListView id="list-scripts" prefHeight="479.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
+                                          <ListView id="list-scripts" prefHeight="473.0" prefWidth="138.0" style="-fx-background-color: transparent;" />
                                           <Button id="btn-script" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" style="-fx-background-color: #101010; -fx-text-fill: #cccccc;" text="Start Script" />
                                        </children>
                                     </VBox>
@@ -50,7 +50,7 @@
                                  <children>
                                     <VBox alignment="CENTER" layoutX="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="505.0" prefWidth="160.0">
                                        <children>
-                                          <ListView id="list-debugs" prefHeight="508.0" prefWidth="144.0" style="-fx-background-color: transparent;" />
+                                          <ListView id="list-debugs" prefHeight="473.0" prefWidth="144.0" style="-fx-background-color: transparent;" />
                                           <Button id="btn-debug" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="165.0" style="-fx-background-color: #101010; -fx-text-fill: #cccccc;" text="Start Debug" />
                                        </children>
                                     </VBox>
@@ -75,14 +75,24 @@
             </HBox>
             <HBox prefHeight="24.0" prefWidth="1095.0">
                <children>
-                  <Button id="game-btn" mnemonicParsing="false" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" text="Show Game">
+                  <Button id="bs-show" mnemonicParsing="false" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" text="Show BlueStacks">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="bs2vd" mnemonicParsing="false" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" text="Move BlueStacks To Virtual Desktop">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="game-btn" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" text="Hide Game">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <RadioButton id="fps-low" mnemonicParsing="false" selected="true" style="-fx-text-fill: #cccccc;" text="Low FPS">
+                  <RadioButton id="fps-low" mnemonicParsing="false" style="-fx-text-fill: #cccccc;" text="Low FPS">
                      <HBox.margin>
-                        <Insets left="10.0" top="3.0" />
+                        <Insets left="5.0" top="3.0" />
                      </HBox.margin>
                   </RadioButton>
                   <RadioButton id="fps-med" mnemonicParsing="false" style="-fx-text-fill: #cccccc;" text="Medium FPS">
@@ -93,14 +103,19 @@
                         <Insets top="3.0" />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton id="fps-high" mnemonicParsing="false" style="-fx-text-fill: #cccccc;" text="High FPS">
+                  <RadioButton id="fps-high" mnemonicParsing="false" selected="true" style="-fx-text-fill: #cccccc;" text="High FPS">
                      <HBox.margin>
                         <Insets left="10.0" top="3.0" />
                      </HBox.margin>
                   </RadioButton>
+                  <Button id="console-clear" mnemonicParsing="false" style="-fx-background-color: #424242; -fx-text-fill: #cccccc;" text="Clear Console">
+                     <HBox.margin>
+                        <Insets left="328.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
                <VBox.margin>
-                  <Insets left="5.0" top="8.0" />
+                  <Insets left="5.0" top="10.0" />
                </VBox.margin>
             </HBox>
             <TextArea id="console" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #424242; -fx-control-inner-background: #424242; -fx-border-color: transparent; -fx-text-fill: #cccccc;">

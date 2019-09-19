@@ -8,13 +8,14 @@ import java.awt.Rectangle
 import java.awt.image.BufferedImage
 import java.awt.image.PixelGrabber
 import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
-
 
 object OpenCV {
 
     fun mat(imgPath: String, format: Int): Mat {
-        val mat = Imgcodecs.imread(imgPath, format)
+        val img = ImageIO.read(javaClass.getResource("/models/$imgPath"))
+        val mat = img.toMat()
         if (format != Imgcodecs.IMREAD_GRAYSCALE) {
             val reducedColor = Mat()
             Imgproc.cvtColor(mat, reducedColor, Imgproc.COLOR_RGBA2RGB)
@@ -69,6 +70,13 @@ fun Mat.pixels(): IntArray {
         it.grabPixels()
         return it.pixels as IntArray
     }
+}
+
+fun BufferedImage.toMat(): Mat {
+    val data = ByteArrayOutputStream()
+    ImageIO.write(this, "png", data)
+    data.flush()
+    return Imgcodecs.imdecode(MatOfByte(*data.toByteArray()), Imgcodecs.CV_LOAD_IMAGE_UNCHANGED)
 }
 
 private fun Mat.findTemplates(breakFirst: Boolean, vararg templates: Pair<Mat, Double>): List<Rectangle> {

@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
+import javax.swing.SwingUtilities.invokeLater
 import kotlin.system.exitProcess
 
 class OSMobileBot : Application() {
@@ -83,6 +84,15 @@ class OSMobileBot : Application() {
         public val console: TextArea
             get() = scene!!.lookup("#console") as TextArea
 
+        private val clearConsole: Button
+            get() = scene!!.lookup("#console-clear") as Button
+
+        private val moveToVD: Button
+            get() = scene!!.lookup("#bs2vd") as Button
+
+        private val showBS: Button
+            get() = scene!!.lookup("#bs-show") as Button
+
         private var _script: Script? = null
 
         var script: Script?
@@ -112,7 +122,7 @@ class OSMobileBot : Application() {
                 }
             }
 
-        private var showing: Boolean = false
+        private var showing: Boolean = true
 
         private var drawnImage: BufferedImage? = null
         private var drawnPixels: IntArray = IntArray(0)
@@ -133,6 +143,8 @@ class OSMobileBot : Application() {
                     _script?.drawDebug(g as Graphics2D)
                 } else {
                     g.clearRect(0, 0, width, height)
+                    g.color = Color.BLACK
+                    g.fillRect(0, 0, width, height)
                 }
             }
         }
@@ -169,7 +181,7 @@ class OSMobileBot : Application() {
 
         createOverlay()
 
-        SwingUtilities.invokeLater {
+        invokeLater {
             setupUI()
             startPixelTimer()
             startRepaintTimer()
@@ -185,35 +197,33 @@ class OSMobileBot : Application() {
     private fun setupUI() {
         gameBtn.setOnAction {
             showing = !showing
+            canvas.repaint()
             gameBtn.text = if (showing) "Hide Game" else "Show Game"
         }
 
-        fpsLow.isSelected = true
+        fpsLow.isSelected = false
         fpsMed.isSelected = false
-        fpsHigh.isSelected = false
+        fpsHigh.isSelected = true
 
         fpsLow.setOnAction {
-            if (fpsLow.isSelected) {
-                fpsMed.isSelected = false
-                fpsHigh.isSelected = false
-                startRepaintTimer()
-            }
+            fpsLow.isSelected = true
+            fpsMed.isSelected = false
+            fpsHigh.isSelected = false
+            startRepaintTimer()
         }
 
         fpsMed.setOnAction {
-            if (fpsMed.isSelected) {
-                fpsLow.isSelected = false
-                fpsHigh.isSelected = false
-                startRepaintTimer()
-            }
+            fpsMed.isSelected = true
+            fpsLow.isSelected = false
+            fpsHigh.isSelected = false
+            startRepaintTimer()
         }
 
         fpsHigh.setOnAction {
-            if (fpsHigh.isSelected) {
-                fpsLow.isSelected = false
-                fpsMed.isSelected = false
-                startRepaintTimer()
-            }
+            fpsHigh.isSelected = true
+            fpsLow.isSelected = false
+            fpsMed.isSelected = false
+            startRepaintTimer()
         }
 
         // Add scripts
@@ -246,13 +256,27 @@ class OSMobileBot : Application() {
                 }
             }
         }
+
+        moveToVD.setOnAction {
+            BlueStacks.sendToVirtualDesktop()
+        }
+
+        clearConsole.setOnAction {
+            invokeLater {
+                console.text = ""
+            }
+        }
+
+        showBS.setOnAction {
+            BlueStacks.focus()
+        }
     }
 
     private fun createOverlay() {
         val pane = scene!!.lookup("#image-pane") as Pane
         val node = scene!!.lookup("#canvas") as SwingNode
 
-        SwingUtilities.invokeLater {
+        invokeLater {
             node.prefWidth(pane.width)
             node.prefHeight(pane.height)
 
@@ -289,25 +313,27 @@ class OSMobileBot : Application() {
 
         val repaintTask = object : TimerTask() {
             override fun run() {
-                if (drawnImage == null) {
-                    drawnImage = BlueStacks.snapshot()
-                } else {
-                    if (showing) {
-                        drawnImage!!.setRGB(
-                            0,
-                            0,
-                            drawnImage!!.width,
-                            drawnImage!!.height,
-                            drawnPixels,
-                            0,
-                            drawnImage!!.width
-                        )
+                try {
+                    if (drawnImage == null) {
+                        drawnImage = BlueStacks.snapshot()
+                    } else {
+                        if (showing) {
+                            drawnImage!!.setRGB(
+                                0,
+                                0,
+                                drawnImage!!.width,
+                                drawnImage!!.height,
+                                drawnPixels,
+                                0,
+                                drawnImage!!.width
+                            )
+                        }
                     }
-                }
 
-                if (showing) {
-                    canvas.repaint()
-                }
+                    if (showing) {
+                        canvas.repaint()
+                    }
+                } catch (_: ArrayIndexOutOfBoundsException) {}
             }
         }
 
