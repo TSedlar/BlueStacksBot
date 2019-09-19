@@ -1,5 +1,5 @@
-# OSMobileBot
-A color recognition OSRS bot for the BlueStacks Emulator
+# BlueStacksBot
+A color recognition bot for the BlueStacks Emulator
 
 ### Requirements
 
