@@ -26,6 +26,7 @@ import java.util.*
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeLater
+import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 class OSMobileBot : Application() {
@@ -182,7 +183,6 @@ class OSMobileBot : Application() {
         createOverlay()
 
         invokeLater {
-            OSRSConfig.extract()
             setupUI()
             startPixelTimer()
             startRepaintTimer()
@@ -346,7 +346,12 @@ class OSMobileBot : Application() {
 fun main() {
     object : Thread() {
         override fun run() {
-            OpenCVLoader.load()
+            thread {
+                OpenCVLoader.load()
+                OSRSConfig.extract()
+                AHK.extract()
+                AHK.launch()
+            }
             Application.launch(OSMobileBot::class.java)
         }
     }.start()

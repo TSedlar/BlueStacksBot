@@ -13,11 +13,13 @@ object Windows10 {
         }
 
         User32.INSTANCE.SetForegroundWindow(hwnd)
+        User32.INSTANCE.SetFocus(hwnd)
 
         // Wait for foreground window
         Thread.sleep(500)
 
         val r = Robot()
+
         // Press WIN+TAB (Open virtual desktop manager)
         r.keyPress(KeyEvent.VK_WINDOWS)
         r.keyPress(KeyEvent.VK_TAB)
@@ -25,7 +27,7 @@ object Windows10 {
         r.keyRelease(KeyEvent.VK_TAB)
 
         // Wait a bit for desktop manager to open
-        Thread.sleep(750)
+        Thread.sleep(2500)
 
         // Press Shift+F10 (Open menu)
         r.keyPress(KeyEvent.VK_SHIFT)
@@ -39,6 +41,7 @@ object Windows10 {
         // Go down 2 menu entries (move to)
         r.keyPress(KeyEvent.VK_DOWN)
         r.keyRelease(KeyEvent.VK_DOWN)
+        Thread.sleep(100)
         r.keyPress(KeyEvent.VK_DOWN)
         r.keyRelease(KeyEvent.VK_DOWN)
 
@@ -50,7 +53,7 @@ object Windows10 {
         r.keyRelease(KeyEvent.VK_RIGHT)
 
         // Wait for submenu to open
-        Thread.sleep(500)
+        Thread.sleep(250)
 
         // Go to the new desktop entry
         r.keyPress(KeyEvent.VK_UP)
