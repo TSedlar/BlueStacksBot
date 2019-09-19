@@ -182,6 +182,7 @@ class OSMobileBot : Application() {
         createOverlay()
 
         invokeLater {
+            OSRSConfig.extract()
             setupUI()
             startPixelTimer()
             startRepaintTimer()
