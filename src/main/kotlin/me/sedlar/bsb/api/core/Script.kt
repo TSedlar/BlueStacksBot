@@ -23,17 +23,6 @@ abstract class Script(author: String, name: String) : Runnable {
     open fun onStop() {}
 
     open fun setup(): Boolean {
-        return doDefaultSetup()
-    }
-
-    open fun doDefaultSetup(): Boolean {
-        if (!OSRSGameState.setCamZoom(3)) {
-            return false
-        }
-        if (!OSRSGameState.setBrightness(2)) {
-            return false
-        }
-        OSRSGameState.resetPerspective()
         return true
     }
 

@@ -1,51 +1,52 @@
 package me.sedlar.bsb.api.game.osrs
 
-import me.sedlar.bsb.api.core.Keyboard
+import me.sedlar.bsb.BlueStacks
 import me.sedlar.bsb.api.core.Script.Companion.doSafeLoop
 import me.sedlar.bsb.api.game.GameScreen
 import me.sedlar.bsb.api.game.center
 import me.sedlar.bsb.api.util.OpenCV
 import me.sedlar.bsb.api.util.findFirstTemplate
+import kotlin.random.Random.Default.nextInt
 import kotlin.random.Random.Default.nextLong
 
 object OSRSGameState {
 
-    val COMPASS_BOUNDS = GameScreen.PRect(78.78, 0.55, 4.78, 7.64)
+    val COMPASS_BOUNDS = GameScreen.PRect(75.51, 0.36, 5.03, 8.74)
 
-    val LOGIN_SCREEN_BOUNDS = GameScreen.PRect(29.11, 29.82, 41.11, 39.64)
+    val LOGIN_SCREEN_BOUNDS = GameScreen.PRect(28.02, 30.05, 40.21, 40.26)
     val LOGIN_SCREEN_MATS = OpenCV.normModelRange("api/osrs/login_screen", 1..4, 0.95)
 
-    val LOBBY_PLAY_BOUNDS = GameScreen.PRect(36.22, 50.91, 27.67, 19.64)
+    val LOBBY_PLAY_BOUNDS = GameScreen.PRect(34.76, 51.0, 26.52, 20.22)
     val LOBBY_PLAY_MAT = OpenCV.mat("api/osrs/lobby_play.png")
 
-    val DROP_MODE_BOUNDS = GameScreen.PRect(0.78, 30.91, 4.56, 5.45)
+    val DROP_MODE_BOUNDS = GameScreen.PRect(0.75, 30.42, 4.28, 5.83)
     val DROP_MODE_MAT = OpenCV.mat("api/osrs/drop_mode.png")
 
-    val INV_TAB_BOUNDS = GameScreen.PRect(94.78, 36.73, 4.67, 8.18)
+    val INV_TAB_BOUNDS = GameScreen.PRect(91.02, 36.07, 4.49, 8.56)
     val INV_OPEN_MAT = OpenCV.mat("api/osrs/inv_open.png")
 
-    val SETTINGS_TAB_BOUNDS = GameScreen.PRect(94.56, 71.82, 5.0, 8.91)
+    val SETTINGS_TAB_BOUNDS = GameScreen.PRect(90.59, 72.13, 5.03, 8.74)
     val SETTINGS_OPEN_MAT = OpenCV.mat("api/osrs/settings_open.png")
 
-    val PHONE_SUB_BOUNDS = GameScreen.PRect(73.33, 37.45, 5.33, 8.91)
+    val PHONE_SUB_BOUNDS = GameScreen.PRect(70.27, 37.16, 5.24, 9.65)
     val PHONE_SUB_OPEN_MAT = OpenCV.mat("api/osrs/phone_sub_open.png")
 
-    val CAM_ZOOM_BOUNDS = GameScreen.PRect(78.0, 48.18, 14.33, 4.55)
-    val BRIGHTNESS_LEVEL_BOUNDS = GameScreen.PRect(78.0, 54.55, 14.33, 4.55)
+    val CAM_ZOOM_BOUNDS = GameScreen.PRect(74.65, 47.91, 14.65, 5.46)
+    val BRIGHTNESS_LEVEL_BOUNDS = GameScreen.PRect(74.65, 54.28, 14.65, 5.46)
 
     val TOGGLE_GREEN_MAT = OpenCV.mat("api/osrs/toggle_green.png")
     val TOGGLE_BLUE_MAT = OpenCV.mat("api/osrs/toggle_blue.png")
 
-    val CAM_1 = GameScreen.PPoint(79.44, 50.55) // zoomed out
-    val CAM_2 = GameScreen.PPoint(82.11, 50.55)
-    val CAM_3 = GameScreen.PPoint(85.22, 50.55)
-    val CAM_4 = GameScreen.PPoint(88.11, 50.55)
-    val CAM_5 = GameScreen.PPoint(91.00, 50.55) // zoomed in
+    val CAM_1 = GameScreen.PPoint(76.35, 50.27) // zoomed out
+    val CAM_2 = GameScreen.PPoint(78.92, 50.27)
+    val CAM_3 = GameScreen.PPoint(81.91, 50.27)
+    val CAM_4 = GameScreen.PPoint(84.59, 50.27)
+    val CAM_5 = GameScreen.PPoint(87.47, 50.27) // zoomed in
 
-    val BRIGHTNESS_1 = GameScreen.PPoint(80.0, 56.91) // dim
-    val BRIGHTNESS_2 = GameScreen.PPoint(83.22, 56.91)
-    val BRIGHTNESS_3 = GameScreen.PPoint(86.89, 56.91)
-    val BRIGHTNESS_4 = GameScreen.PPoint(90.67, 56.91) // bright
+    val BRIGHTNESS_1 = GameScreen.PPoint(76.79, 56.65) // dim
+    val BRIGHTNESS_2 = GameScreen.PPoint(80.11, 56.65)
+    val BRIGHTNESS_3 = GameScreen.PPoint(83.42, 56.65)
+    val BRIGHTNESS_4 = GameScreen.PPoint(87.06, 56.65) // bright
 
     fun isAtLogin(): Boolean {
         return LOGIN_SCREEN_BOUNDS.toMat().findFirstTemplate(*LOGIN_SCREEN_MATS.toTypedArray()) != null
@@ -129,6 +130,26 @@ object OSRSGameState {
         )
     }
 
+    fun swipeCamUp() {
+        val xLoc = nextInt(590, 610)
+        BlueStacks.adbDrag(
+            xLoc,
+            nextInt(45, 65),
+            xLoc,
+            nextInt(390, 410)
+        )
+    }
+
+    fun swipeCamDown() {
+        val xLoc = nextInt(590, 610)
+        BlueStacks.adbDrag(
+            xLoc,
+            nextInt(390, 410),
+            xLoc,
+            nextInt(45, 65)
+        )
+    }
+
     fun setBrightness(stage: GameScreen.PPoint): Boolean {
         var didSet = false
         doSafeLoop({ isInGame() && !didSet }) {
@@ -170,6 +191,6 @@ object OSRSGameState {
 
     fun resetPerspective() {
         COMPASS_BOUNDS.click(8)
-        Keyboard.arrowUp()
+        swipeCamUp()
     }
 }

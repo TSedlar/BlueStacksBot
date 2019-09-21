@@ -5,8 +5,8 @@ import java.nio.file.Files
 
 object OSRSConfig {
 
-    val FILE_NAMES = arrayOf(
-        "com.jagex.oldscape.android.cfg"
+    val FILE_NAMES = emptyArray<String>(
+        /*"com.jagex.oldscape.android.cfg"*/
     )
 
     fun extract() {

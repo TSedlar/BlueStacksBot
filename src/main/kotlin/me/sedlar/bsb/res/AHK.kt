@@ -1,41 +1,38 @@
 package me.sedlar.bsb.res
 
-import net.harawata.appdirs.AppDirsFactory
-import java.awt.Desktop
-import java.io.File
-import java.nio.file.Files
+import com.sun.jna.Library
+import com.sun.jna.Native
+import com.sun.jna.win32.W32APIOptions
+import me.sedlar.bsb.native.JavaLibraryPath
+import com.sun.jna.WString
+import com.sun.jna.Pointer
 
 object AHK {
 
-    val FILE_NAMES = arrayOf(
-        "BSB_OSRS.ahk"
-    )
+    val INSTANCE = Native.load("AutoHotkey", AutoHotKey::class.java, W32APIOptions.DEFAULT_OPTIONS)
+}
 
-    fun files(): List<File> {
-        val dirs = AppDirsFactory.getInstance()
-        val site = dirs.getSiteConfigDir("bsb", "shared", "BlueStacksBot")
-        return FILE_NAMES.map { File(site, it) }
-    }
+interface AutoHotKey : Library {
 
-    fun extract() {
-        val files = files()
-        FILE_NAMES.indices.forEach {
-            val fileName = FILE_NAMES[it]
-            val ahkResource = javaClass.getResourceAsStream("/ahk/$fileName")
-            val ahkData = ahkResource.readBytes()
-            val ahkFile = files[it]
+    fun ahkExec(s: WString)
 
-            ahkFile.parentFile.mkdirs()
-            Files.write(ahkFile.toPath(), ahkData)
+    fun ahkdll(s: WString, o: WString, p: WString)
 
-            println("Extracted AHK: ${ahkFile.normalizedPath}")
-        }
-    }
+    fun addFile(s: WString, a: Int)
 
-    fun launch() {
-        files().forEach {
-            Desktop.getDesktop().open(it)
-        }
-        Thread.sleep(1500)
-    }
+    fun ahktextdll(s: WString, o: WString, p: WString)
+
+    fun ahkFunction(
+        f: WString,
+        p1: WString,
+        p2: WString,
+        p3: WString,
+        p4: WString,
+        p5: WString,
+        p6: WString,
+        p7: WString,
+        p8: WString,
+        p9: WString,
+        p10: WString
+    ): Pointer
 }

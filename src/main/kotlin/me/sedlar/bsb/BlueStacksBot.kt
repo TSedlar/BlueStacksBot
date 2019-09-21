@@ -11,8 +11,7 @@ import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.stage.Stage
 import me.sedlar.bsb.api.core.Script
-import me.sedlar.bsb.native.OpenCVLoader
-import me.sedlar.bsb.res.AHK
+import me.sedlar.bsb.native.JavaLibraryPath
 import me.sedlar.bsb.res.OSRSConfig
 import org.opencv.core.Mat
 import org.reflections.Reflections
@@ -135,12 +134,12 @@ class BlueStacksBot : Application() {
         val canvas = object : JPanel() {
             override fun paintComponent(g: Graphics) {
                 super.paintComponent(g)
+                g.clearRect(0, 0, width, height)
 
                 if (showing && drawnImage != null) {
                     g.drawImage(drawnImage, 0, 0, null)
                     _script?.drawDebug(g as Graphics2D)
                 } else {
-                    g.clearRect(0, 0, width, height)
                     g.color = Color.BLACK
                     g.fillRect(0, 0, width, height)
                 }
@@ -408,12 +407,8 @@ class BlueStacksBot : Application() {
 fun main() {
     object : Thread() {
         override fun run() {
-            thread {
-                OpenCVLoader.load()
-                OSRSConfig.extract()
-                AHK.extract()
-                AHK.launch()
-            }
+            JavaLibraryPath.extractAndUseResourceLibs()
+            OSRSConfig.extract()
             Application.launch(BlueStacksBot::class.java)
         }
     }.start()

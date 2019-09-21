@@ -4,20 +4,16 @@ import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.GDI32Util
 import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
-import com.sun.jna.platform.win32.WinDef.LPARAM
-import com.sun.jna.platform.win32.WinDef.WPARAM
 import com.sun.jna.platform.win32.WinUser.SWP_NOMOVE
 import com.sun.jna.platform.win32.WinUser.SWP_NOSIZE
-import me.sedlar.bsb.native.ExtGDI32
-import me.sedlar.bsb.native.Windows10
-import me.sedlar.bsb.native.hasPointer
+import me.sedlar.bsb.api.game.osrs.core.GameState
+import me.sedlar.bsb.native.*
 import org.opencv.core.CvType
 import org.opencv.core.Mat
 import java.awt.Color
 import java.awt.Rectangle
 import java.awt.Toolkit
 import java.awt.image.BufferedImage
-
 
 private var mainHandle: WinDef.HWND? = null
 private var winHandle: WinDef.HWND? = null
@@ -27,27 +23,31 @@ private const val MAIN_NAME = "BlueStacks"
 private const val WIN_NAME = "WindowsForms10.Window.8.app.0.34f5582_r6_ad1"
 private const val CANVAS_NAME = "BlueStacksApp"
 
-const val WM_COMMAND = 0x111
 const val WM_LBUTTONDOWN = 0x201
 const val WM_LBUTTONUP = 0x202
-const val WM_LBUTTONDBLCLK = 0x203
-const val WM_RBUTTONDOWN = 0x204
-const val WM_RBUTTONUP = 0x205
-const val WM_RBUTTONDBLCLK = 0x206
-const val WM_KEYDOWN = 0x100
-const val WM_KEYUP = 0x101
-const val WM_MOUSEWHEEL = 0x020A
-const val WM_MOUSEMOVE = 0x0200
-const val WM_SETCURSOR = 0x0020
-const val WM_CHAR = 0x0102
 
 object BlueStacks {
 
-    const val GAME_WIDTH = 900
-    const val GAME_HEIGHT = 550
+    val handleMain: WinDef.HWND
+        get() = mainHandle!!
+
+    val handleWin: WinDef.HWND
+        get() = winHandle!!
+
+    val handleCanvas: WinDef.HWND
+        get() = canvasHandle!!
+
+    const val GAME_WIDTH = 935 // adb screen is 1900
+    const val GAME_HEIGHT = 549 // adb screen is 1075
+
+    const val ADB_X_SCALE = 2.13863636364
+    const val ADB_Y_SCALE = 2.11764705882
+
     private val BLANK_IMAGE = BufferedImage(GAME_WIDTH, GAME_HEIGHT, BufferedImage.TYPE_INT_RGB)
 
-    private var canvasBounds: Rectangle? = null
+    internal var canvasBounds: Rectangle? = null
+
+    private var mat: Mat? = null
 
     val CANVAS_BOUNDS: Rectangle
         get() = canvasBounds!!
@@ -63,6 +63,28 @@ object BlueStacks {
         }
 
         mainHandle = User32.INSTANCE.FindWindow(null, MAIN_NAME)
+
+        mainHandle?.hasPointer()?.let {
+            println("Setting window size...")
+
+            val screen = Toolkit.getDefaultToolkit().screenSize
+            val midX = (screen.width / 2) - (GAME_WIDTH / 2)
+            val midY = (screen.height / 2) - (GAME_HEIGHT / 2)
+
+            val hwndRect = WinDef.RECT()
+
+            User32.INSTANCE.GetWindowRect(mainHandle, hwndRect)
+
+            val currBounds = hwndRect.toRectangle()
+
+            if (currBounds.width != GAME_WIDTH && currBounds.height != GAME_HEIGHT) {
+                User32.INSTANCE.MoveWindow(mainHandle, midX, midY, GAME_WIDTH, GAME_HEIGHT, true)
+                Thread.sleep(1000)
+                User32.INSTANCE.GetWindowRect(mainHandle, hwndRect)
+                println(hwndRect.toRectangle())
+            }
+        }
+
         winHandle = User32.INSTANCE.FindWindowEx(mainHandle, WinDef.HWND(Pointer.NULL), WIN_NAME, null)
         canvasHandle = User32.INSTANCE.FindWindowEx(winHandle, WinDef.HWND(Pointer.NULL), CANVAS_NAME, null)
 
@@ -73,16 +95,6 @@ object BlueStacks {
         println("Main Handle: $mainHandle")
         println("Win Handle: $winHandle")
         println("Canvas Handle: $canvasHandle")
-
-        println("Setting window size...")
-
-        val screen = Toolkit.getDefaultToolkit().screenSize
-        val midX = (screen.width / 2) - (GAME_WIDTH / 2)
-        val midY = (screen.height / 2) - (GAME_HEIGHT / 2)
-
-        User32.INSTANCE.SetWindowPos(mainHandle, WinDef.HWND(Pointer.NULL), midX, midY, GAME_WIDTH, GAME_HEIGHT, 0)
-
-        Thread.sleep(1000)
 
         val canvasRect = WinDef.RECT()
 
@@ -103,44 +115,40 @@ object BlueStacks {
 
     fun doSafeAction(action: () -> Unit) {
         if (findHandles()) {
+            if (User32Ext.INSTANCE.IsIconic(mainHandle!!)) {
+                val bottom = WinDef.HWND(Pointer.createConstant(1))
+                User32.INSTANCE.SetWindowPos(
+                    mainHandle, bottom, 0, 0, 0, 0,
+                    SWP_NOSIZE or SWP_NOMOVE
+                )
+            }
             action()
         }
     }
 
-    fun click(x: Int, y: Int, hold: Int = 0) {
-        doSafeAction {
-            val position = (y shl 16) or (x and 0xFFFF)
-            val w = WPARAM(0)
-            val l = LPARAM(position.toLong())
-            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
-            if (hold > 0) {
-                Thread.sleep(hold.toLong())
-            }
-            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
-        }
+    fun click(x: Int, y: Int) {
+//        doSafeAction {
+//            val position = (y shl 16) or (x and 0xFFFF)
+//            val w = WinDef.WPARAM(0)
+//            val l = WinDef.LPARAM(position.toLong())
+//            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
+//            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
+//        }
+        adbClick(x, y) // lets experiment only using adb for now
     }
 
-    fun sendKey(keyCode: Int, scanCode: Int, wait: Int = 0) {
-        doSafeAction {
-            val activeWin = User32.INSTANCE.GetForegroundWindow()
-            User32.INSTANCE.SetForegroundWindow(mainHandle) // sadly has to be focused to send keys..
-            Thread.sleep(500)
-            val wparam = WPARAM(keyCode.toLong())
-            val lParam = 0x00000001 or (scanCode /* scancode */ shl 16) or 0x01000000 /* extended */
-            val lparamDown = LPARAM(lParam.toLong())
-            val lparamUp = LPARAM((lParam or (1 shl 30) or (1 shl 31)).toLong())
-            User32.INSTANCE.PostMessage(winHandle, WM_KEYDOWN, wparam, lparamDown)
-            User32.INSTANCE.PostMessage(winHandle, WM_KEYUP, wparam, lparamUp)
-            Thread.sleep(250)
-            // send to back
-            val bottom = WinDef.HWND(Pointer.createConstant(1))
-            User32.INSTANCE.SetWindowPos(
-                mainHandle, bottom, 0, 0, 0, 0,
-                SWP_NOSIZE or SWP_NOMOVE
-            )
-            Thread.sleep(wait.toLong())
-            User32.INSTANCE.SetForegroundWindow(activeWin)
-        }
+    fun adbClick(x: Int, y: Int) {
+        val transX = (x * ADB_X_SCALE).toInt()
+        val transY = (y * ADB_Y_SCALE).toInt()
+        ADB.shell("input tap $transX $transY")
+    }
+
+    fun adbDrag(x1: Int, y1: Int, x2: Int, y2: Int) {
+        val t1X = (x1 * ADB_X_SCALE).toInt()
+        val t1Y = (y1 * ADB_Y_SCALE).toInt()
+        val t2X = (x2 * ADB_X_SCALE).toInt()
+        val t2Y = (y2 * ADB_Y_SCALE).toInt()
+        ADB.shell("input swipe $t1X $t1Y $t2X $t2Y")
     }
 
     fun snapshot(): BufferedImage {
@@ -160,13 +168,14 @@ object BlueStacks {
     }
 
     fun mat(): Mat {
-        var mat = Mat()
         doSafeAction {
-            mat = Mat(canvasBounds!!.height, canvasBounds!!.width, CvType.CV_8UC3)
+            if (mat == null) {
+                mat = Mat(canvasBounds!!.height, canvasBounds!!.width, CvType.CV_8UC3)
+            }
 
             val pixels = BlueStacksBot.pixels
 
-            val data = ByteArray(canvasBounds!!.width * canvasBounds!!.height * mat.elemSize().toInt())
+            val data = ByteArray(canvasBounds!!.width * canvasBounds!!.height * mat!!.elemSize().toInt())
 
             for (i in pixels.indices) {
                 data[i * 3] = (pixels[i] shr 0 and 0xFF).toByte() // r
@@ -174,9 +183,9 @@ object BlueStacks {
                 data[i * 3 + 2] = (pixels[i] shr 16 and 0xFF).toByte() // b
             }
 
-            mat.put(0, 0, data)
+            mat!!.put(0, 0, data)
         }
-        return mat
+        return mat!!
     }
 
     fun colorAt(x: Int, y: Int): Color {

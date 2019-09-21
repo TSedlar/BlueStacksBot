@@ -1,9 +1,10 @@
 package me.sedlar.bsb.scripts
 
 import javafx.scene.layout.Pane
-import me.sedlar.bsb.api.core.Script
+import me.sedlar.bsb.api.game.osrs.core.OSRSScript
+import java.awt.Graphics2D
 
-class EmptyScript : Script(
+class EmptyScript : OSRSScript(
     author = "",
     name = "Empty Script"
 ) {
@@ -15,6 +16,9 @@ class EmptyScript : Script(
     }
 
     override fun onStop() {
+    }
+
+    override fun drawDebug(g: Graphics2D) {
     }
 
     override fun loop(): Int {

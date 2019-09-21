@@ -35,8 +35,8 @@ class GameScreen {
             return Point(WIDTH / 2, HEIGHT / 2)
         }
 
-        fun click(x: Int, y: Int, hold: Int = 0) {
-            BlueStacks.click(x, y, hold)
+        fun click(x: Int, y: Int) {
+            BlueStacks.click(x, y)
         }
 
         fun click(point: Point) {

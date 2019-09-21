@@ -10,6 +10,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -19,6 +20,8 @@ dependencies {
     compile files('src/main/resources/lib/opencv-341.jar')
     compile group: 'net.harawata', name: 'appdirs', version: '1.0.3'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+    compile group: 'pl.agdula.autoitj', name: 'auto-itj', version: '2.0.0', ext: 'pom'
+    compile group: 'pl.agdula.autoitj', name: 'auto-itj-local', version: '2.0.0'
 }
 
 compileKotlin {
