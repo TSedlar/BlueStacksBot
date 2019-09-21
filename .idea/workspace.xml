@@ -2,33 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3713bfca-a899-4536-8852-e7f2e1b48339" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/ADB.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/lib/AdbWinApi.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/lib/adb.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/lib/x64/AutoHotkey.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/ahk/BSB_OSRS.ahk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/configs/com.jagex.oldscape.android.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacksBot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacksBot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Keyboard.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Script.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Script.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/log.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/log.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/tree/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/tree/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/tree/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/tree/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/models/scripts/maple_shield/tree/3.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/core/OSRSScript.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/core/OSRSScript.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/JavaLibraryPath.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/JavaLibraryPath.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/OpenCVLoader.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/User32Ext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/User32Ext.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/res/AHK.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/res/AHK.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/res/BlueStacksMacros.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/res/BlueStacksMacros.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ahk/BSB_OSRS.ahk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/configs/com.jagex.oldscape.android.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/MapleShield.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/MapleShield.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/log.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/log.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/3.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -68,53 +53,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/JavaLibraryPath.kt">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/MapleShield.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+            <state relative-caret-position="189">
+              <caret line="135" column="42" lean-forward="true" selection-start-line="135" selection-start-column="42" selection-end-line="135" selection-end-column="42" />
               <folding>
-                <element signature="e#30#214#0" expanded="true" />
+                <element signature="e#36#692#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/core/OSRSScript.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+            <state relative-caret-position="95">
+              <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
               <folding>
-                <element signature="e#42#176#0" expanded="true" />
+                <element signature="e#31#140#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Script.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSInventory.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="334">
+              <caret line="110" column="8" selection-start-line="110" selection-start-column="8" selection-end-line="110" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="786">
-              <caret line="213" column="1" lean-forward="true" selection-start-line="213" selection-start-column="1" selection-end-line="213" selection-end-column="1" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/1.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacksBot.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/2.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/Timing.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="409" column="46" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
+            <state relative-caret-position="167">
+              <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -122,41 +108,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="96" column="23" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="23" />
+            <state relative-caret-position="1242">
+              <caret line="76" column="5" lean-forward="true" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-              <folding>
-                <element signature="e#23#598#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/log.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/ADB.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="23" column="78" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
-              <folding>
-                <element signature="e#23#147#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/resources/models/api/osrs/drop_mode.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/OpenCV.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+            <state relative-caret-position="1111">
+              <caret line="86" column="43" lean-forward="true" selection-start-line="86" selection-start-column="43" selection-end-line="86" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -184,9 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/osmb/api/game/GameState.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/osmb/api/core/Keyboard.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/osmb/api/core/Script.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/osmb/native/Keyboard.java" />
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/osmb/native/Keyboard.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/osmb/native/JNAKeyboard.kt" />
@@ -228,19 +197,22 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Script.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacksBot.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/core/OSRSScript.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/JavaLibraryPath.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/ADB.kt" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/ADB.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSInventory.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/OpenCV.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/MapleShield.kt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="114" />
-    <option name="y" value="142" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="37" />
+    <option name="y" value="83" />
     <option name="width" value="1368" />
     <option name="height" value="1000" />
   </component>
@@ -274,6 +246,13 @@
               <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -332,9 +311,7 @@
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="bsb" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="osrs" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
@@ -350,6 +327,16 @@
               <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="bsb" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="osrs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -358,7 +345,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
@@ -366,8 +353,8 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="x64" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="osrs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
@@ -375,8 +362,35 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="x86" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="maple_shield" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="maple_shield" type="462c0819:PsiDirectoryNode" />
+              <item name="tree" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bsb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OSMobileBot" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -421,6 +435,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Kotlin.me.sedlar.bsb.BlueStacksBotKt">
+    <configuration name="me.sedlar.bsb.ADBKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="me.sedlar.bsb.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="me.sedlar.bsb.ADBKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="me.sedlar.bsb.BlueStacksBotKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="me.sedlar.bsb.main" />
       <option name="VM_PARAMETERS" />
@@ -464,36 +491,38 @@
       <item itemvalue="Kotlin.me.sedlar.bsb.BlueStacksBotKt" />
       <item itemvalue="Kotlin.me.sedlar.bsb.native.JavaLibraryPathKt" />
       <item itemvalue="Kotlin.me.sedlar.bsb.BlueStacksKt" />
+      <item itemvalue="Kotlin.me.sedlar.bsb.ADBKt" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Kotlin.me.sedlar.bsb.BlueStacksBotKt" />
+        <item itemvalue="Kotlin.me.sedlar.bsb.ADBKt" />
         <item itemvalue="Kotlin.me.sedlar.bsb.BlueStacksKt" />
         <item itemvalue="Kotlin.me.sedlar.bsb.native.JavaLibraryPathKt" />
       </list>
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="22" width="2576" height="1426" extended-state="6" />
+    <frame x="37" y="83" width="1368" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13155803" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25688073" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32946634" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27146173" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2710496" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39907727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.4354215" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.34948096" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.3298731" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32637277" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3252595" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -560,60 +589,6 @@
     <option name="serverPort" value="9101" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/HWNDExt.kt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/tutorial_miner/copper/1.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/main/resources/lib/opencv-341.jar!/org/opencv/imgproc/Imgproc.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="735" column="23" selection-start-line="735" selection-start-column="23" selection-end-line="735" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/main/resources/lib/opencv-341.jar!/org/opencv/core/Rect.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/Timing.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-          <folding>
-            <element signature="e#33#158#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/models/api/osrs/phone_sub_open.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/main/resources/lib/opencv-341.jar!/org/opencv/core/Mat.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="346" column="15" selection-start-line="346" selection-start-column="15" selection-end-line="346" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/awt/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1278">
-          <caret line="147" column="13" selection-start-line="147" selection-start-column="13" selection-end-line="147" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna-platform/5.4.0/82e2a06f89664e9e32fbadbb0090fb03e91e2264/jna-platform-5.4.0-sources.jar!/com/sun/jna/platform/WindowUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31914">
@@ -696,37 +671,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSInventory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
-          <folding>
-            <element signature="e#33#172#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/FX.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="30" column="86" selection-start-line="30" selection-start-column="86" selection-end-line="30" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/OpenCV.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2034">
-          <caret line="122" column="8" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/TutorialCopper.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-          <folding>
-            <element signature="e#36#686#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -750,27 +698,9 @@
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/ahk/BSB_OSRS.ahk">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/configs/com.jagex.oldscape.android.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1314">
-          <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Keyboard.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ahk/BSB_OSRS.ahk" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/configs/com.jagex.oldscape.android.cfg" />
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/core/Keyboard.kt" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.30/1093224407fb1a6f5b79358044a2836bb3d899fd/kotlin-stdlib-1.3.30-sources.jar!/kotlin/Library.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -778,9 +708,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.png" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/ExtGDI32.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -812,13 +740,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/OpenCVLoader.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/native/OpenCVLoader.kt" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/res/AHK.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -840,40 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="96" column="23" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="e#23#598#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacksBot.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="409" column="46" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#31#140#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/core/OSRSScript.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -881,13 +769,6 @@
           <folding>
             <element signature="e#42#176#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="786">
-          <caret line="213" column="1" lean-forward="true" selection-start-line="213" selection-start-column="1" selection-end-line="213" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -901,20 +782,131 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/ADB.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="78" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
-          <folding>
-            <element signature="e#23#147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacksBot.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="409" column="46" selection-start-line="409" selection-start-column="46" selection-end-line="409" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.30/1093224407fb1a6f5b79358044a2836bb3d899fd/kotlin-stdlib-1.3.30-sources.jar!/kotlin/io/ReadWrite.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-778">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/TutorialCopper.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+          <folding>
+            <element signature="e#36#686#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/BlueStacks.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="143" column="10" selection-start-line="143" selection-start-column="10" selection-end-line="143" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/ADB.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="37" lean-forward="true" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+          <folding>
+            <element signature="e#23#187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/main/resources/lib/opencv-341.jar!/org/opencv/core/Mat.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="668" column="31" selection-start-line="668" selection-start-column="31" selection-end-line="668" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/GameScreen.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="195" column="25" lean-forward="true" selection-start-line="195" selection-start-column="25" selection-end-line="195" selection-end-column="25" />
+          <folding>
+            <element signature="e#32#329#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/OpenCV.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1111">
+          <caret line="86" column="43" lean-forward="true" selection-start-line="86" selection-start-column="43" selection-end-line="86" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/models/api/osrs/drop_mode.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/log.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSGameState.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1242">
+          <caret line="76" column="5" lean-forward="true" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/game/osrs/OSRSInventory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="110" column="8" selection-start-line="110" selection-start-column="8" selection-end-line="110" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/models/scripts/maple_shield/tree/1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/api/util/Timing.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/EmptyScript.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding>
+            <element signature="e#31#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/me/sedlar/bsb/scripts/osrs/MapleShield.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="135" column="42" lean-forward="true" selection-start-line="135" selection-start-column="42" selection-end-line="135" selection-end-column="42" />
+          <folding>
+            <element signature="e#36#692#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

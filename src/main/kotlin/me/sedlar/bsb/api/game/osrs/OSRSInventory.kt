@@ -9,24 +9,18 @@ import java.awt.Color
 object OSRSInventory {
 
     val ITEM_OUTLINE = Color(15, 13, 9)
-    val BOUNDS = GameScreen.PRect(73.00, 37.82, 21.33, 48.36)
+    val BOUNDS = GameScreen.PRect(69.79, 37.2, 21.33, 48.36)
 
     const val INSET_X = 1.00
     const val INSET_Y = 1.35
-    const val SLOT_MARGIN_X = 0.285
-    const val SLOT_MARGIN_Y = 0.5455
-    const val SLOT_WIDTH = 4.75
-    const val SLOT_HEIGHT = 6.30
+    const val SLOT_WIDTH = 4.80
+    const val SLOT_HEIGHT = 6.72
 
     fun slots(): ArrayList<GameScreen.PRect> {
         val slots = ArrayList<GameScreen.PRect>()
 
         val bounds = BOUNDS.toScreen()
-
-        val marginX =
-            GameScreen.px(SLOT_MARGIN_X)
-        val marginY =
-            GameScreen.py(SLOT_MARGIN_Y)
+        bounds.y += 1
 
         val startX = bounds.x + GameScreen.px(INSET_X)
         val startY = bounds.y + GameScreen.py(INSET_Y)
@@ -41,17 +35,17 @@ object OSRSInventory {
             slots.add(
                 GameScreen.PRect(
                     GameScreen.x2p(x),
-                    GameScreen.y2p(y),
+                    GameScreen.y2p(y) + 0.5,
                     SLOT_WIDTH,
                     SLOT_HEIGHT
                 )
             )
-            x += w + marginX
+            x += w
 
             if ((i + 1) % 4 != 0) continue
 
             x = startX
-            y += h + marginY
+            y += h
         }
 
         return slots

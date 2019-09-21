@@ -4,9 +4,7 @@ import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.GDI32Util
 import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
-import com.sun.jna.platform.win32.WinUser.SWP_NOMOVE
-import com.sun.jna.platform.win32.WinUser.SWP_NOSIZE
-import me.sedlar.bsb.api.game.osrs.core.GameState
+import com.sun.jna.platform.win32.WinUser.*
 import me.sedlar.bsb.native.*
 import org.opencv.core.CvType
 import org.opencv.core.Mat
@@ -14,6 +12,12 @@ import java.awt.Color
 import java.awt.Rectangle
 import java.awt.Toolkit
 import java.awt.image.BufferedImage
+import com.sun.jna.platform.win32.WinUser.WS_SIZEBOX
+import com.sun.jna.platform.win32.WinUser.GWL_STYLE
+import com.sun.jna.platform.win32.WinUser.WS_SYSMENU
+import com.sun.jna.platform.win32.WinUser.WS_MINIMIZEBOX
+import com.sun.jna.platform.win32.WinUser.WS_OVERLAPPED
+
 
 private var mainHandle: WinDef.HWND? = null
 private var winHandle: WinDef.HWND? = null
@@ -57,6 +61,14 @@ object BlueStacks {
                 canvasHandle != null && canvasHandle!!.hasPointer()
     }
 
+    fun moveCenter() {
+        val screen = Toolkit.getDefaultToolkit().screenSize
+        val midX = (screen.width / 2) - (GAME_WIDTH / 2)
+        val midY = (screen.height / 2) - (GAME_HEIGHT / 2)
+
+        User32.INSTANCE.MoveWindow(mainHandle, midX, midY, GAME_WIDTH, GAME_HEIGHT, false)
+    }
+
     fun findHandles(): Boolean {
         if (hasValidHandles()) {
             return true
@@ -66,23 +78,8 @@ object BlueStacks {
 
         mainHandle?.hasPointer()?.let {
             println("Setting window size...")
-
-            val screen = Toolkit.getDefaultToolkit().screenSize
-            val midX = (screen.width / 2) - (GAME_WIDTH / 2)
-            val midY = (screen.height / 2) - (GAME_HEIGHT / 2)
-
-            val hwndRect = WinDef.RECT()
-
-            User32.INSTANCE.GetWindowRect(mainHandle, hwndRect)
-
-            val currBounds = hwndRect.toRectangle()
-
-            if (currBounds.width != GAME_WIDTH && currBounds.height != GAME_HEIGHT) {
-                User32.INSTANCE.MoveWindow(mainHandle, midX, midY, GAME_WIDTH, GAME_HEIGHT, true)
-                Thread.sleep(1000)
-                User32.INSTANCE.GetWindowRect(mainHandle, hwndRect)
-                println(hwndRect.toRectangle())
-            }
+            moveCenter()
+            Thread.sleep(1000)
         }
 
         winHandle = User32.INSTANCE.FindWindowEx(mainHandle, WinDef.HWND(Pointer.NULL), WIN_NAME, null)
@@ -116,10 +113,14 @@ object BlueStacks {
     fun doSafeAction(action: () -> Unit) {
         if (findHandles()) {
             if (User32Ext.INSTANCE.IsIconic(mainHandle!!)) {
+                User32.INSTANCE.ShowWindow(mainHandle, SW_SHOWNOACTIVATE)
+            }
+            val hwndRect = WinDef.RECT()
+            User32.INSTANCE.GetWindowRect(mainHandle, hwndRect)
+            if ((hwndRect.right - hwndRect.left) != GAME_WIDTH && (hwndRect.bottom - hwndRect.top) != GAME_HEIGHT) {
                 val bottom = WinDef.HWND(Pointer.createConstant(1))
                 User32.INSTANCE.SetWindowPos(
-                    mainHandle, bottom, 0, 0, 0, 0,
-                    SWP_NOSIZE or SWP_NOMOVE
+                    mainHandle, bottom, hwndRect.left, hwndRect.top, GAME_WIDTH, GAME_HEIGHT, SWP_NOMOVE
                 )
             }
             action()

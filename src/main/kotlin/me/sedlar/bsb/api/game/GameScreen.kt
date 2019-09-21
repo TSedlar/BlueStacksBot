@@ -3,6 +3,7 @@ package me.sedlar.bsb.api.game
 import me.sedlar.bsb.BlueStacks
 import me.sedlar.bsb.BlueStacksBot
 import me.sedlar.bsb.api.util.FX
+import me.sedlar.bsb.api.util.findFirstTemplate
 import me.sedlar.bsb.api.util.offset
 import me.sedlar.bsb.api.util.round
 import org.opencv.core.Mat
@@ -130,6 +131,23 @@ class GameScreen {
         fun click(offset: Int) {
             click(center.offset(offset))
         }
+
+        fun checkForChanges(times: Int, delayPerLoop: Int, confidence: Double): Double {
+            val original = Mat()
+            toMat().copyTo(original)
+            var stillness = 0
+            for (i in 1..times) {
+                Thread.sleep(delayPerLoop.toLong())
+                if (original.findFirstTemplate(toMat() to confidence) != null) {
+                    stillness++
+                }
+            }
+            return (times - stillness).toDouble() / times.toDouble()
+        }
+
+        fun checkFrameDivergence(original: Mat, frame: Mat, confidence: Double) {
+
+        }
     }
 
     class PRect(px: Double, py: Double, private val pw: Double, private val ph: Double) : ScreenRegion(px, py) {
@@ -174,6 +192,13 @@ fun Rectangle.find(color: Color, tolerance: Int): List<Point> {
 
 val Rectangle.center: Point
     get() = Point(this.centerX.toInt(), this.centerY.toInt())
+
+val Rectangle.matrix: Mat
+    get() = GameScreen.matrix.submat(Rect(this.x, this.y, this.width, this.height))
+
+fun Rectangle.click(offset: Int) {
+    GameScreen.click(center.offset(offset))
+}
 
 fun List<Rectangle>.closestToPlayer(maxDist: Double = Double.MAX_VALUE, exclude: Boolean = false): Rectangle? {
     val player = GameScreen.player.toScreen()

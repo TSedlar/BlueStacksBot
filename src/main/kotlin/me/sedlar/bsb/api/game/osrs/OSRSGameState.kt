@@ -61,11 +61,11 @@ object OSRSGameState {
     }
 
     fun isDropMode(): Boolean {
-        return DROP_MODE_BOUNDS.toMat().findFirstTemplate(DROP_MODE_MAT to 0.95) != null
+        return DROP_MODE_BOUNDS.toMat().findFirstTemplate(DROP_MODE_MAT to 0.985) != null
     }
 
     fun isInvOpen(): Boolean {
-        return INV_TAB_BOUNDS.toMat().findFirstTemplate(INV_OPEN_MAT to 0.95) != null
+        return INV_TAB_BOUNDS.toMat().findFirstTemplate(INV_OPEN_MAT to 0.75) != null
     }
 
     fun isSettingsOpen(): Boolean {
@@ -76,16 +76,22 @@ object OSRSGameState {
         return PHONE_SUB_BOUNDS.toMat().findFirstTemplate(PHONE_SUB_OPEN_MAT to 0.95) != null
     }
 
-    fun setDropMode(enabled: Boolean) {
+    fun setDropMode(enabled: Boolean): Boolean {
         if (enabled) {
-            if (!isDropMode()) {
+            return if (!isDropMode()) {
                 DROP_MODE_BOUNDS.click(5)
                 Thread.sleep(nextLong(750, 1000))
+                true
+            } else {
+                true
             }
         } else {
-            if (isDropMode()) {
+            return if (isDropMode()) {
                 DROP_MODE_BOUNDS.click(5)
                 Thread.sleep(nextLong(750, 1000))
+                true
+            } else {
+                true
             }
         }
     }

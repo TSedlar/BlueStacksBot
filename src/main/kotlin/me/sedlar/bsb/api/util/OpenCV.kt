@@ -82,9 +82,13 @@ fun BufferedImage.toMat(): Mat {
 private fun Mat.findTemplates(breakFirst: Boolean, vararg templates: Pair<Mat, Double>): List<Rectangle> {
     val results: MutableList<Rectangle> = ArrayList()
 
-    templates.forEach {
-        val template = it.first
-        val threshold = it.second
+    for (templatePair in templates) {
+        val template = templatePair.first
+        val threshold = templatePair.second
+
+        if (template.width() > this.width() || template.height() > this.height()) {
+            continue
+        }
 
         val result = Mat()
 
