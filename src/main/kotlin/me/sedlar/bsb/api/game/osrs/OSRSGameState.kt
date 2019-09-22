@@ -4,8 +4,10 @@ import me.sedlar.bsb.BlueStacks
 import me.sedlar.bsb.api.core.Script.Companion.doSafeLoop
 import me.sedlar.bsb.api.game.GameScreen
 import me.sedlar.bsb.api.game.center
+import me.sedlar.bsb.api.util.FX
 import me.sedlar.bsb.api.util.OpenCV
 import me.sedlar.bsb.api.util.findFirstTemplate
+import java.awt.Color
 import kotlin.random.Random.Default.nextInt
 import kotlin.random.Random.Default.nextLong
 
@@ -21,6 +23,10 @@ object OSRSGameState {
 
     val DROP_MODE_BOUNDS = GameScreen.PRect(0.75, 30.42, 4.28, 5.83)
     val DROP_MODE_MAT = OpenCV.mat("api/osrs/drop_mode.png")
+
+    val DROP_MODE_ARROW = GameScreen.PRect(1.5, 32.06, 1.28, 3.1)
+    val DROP_MODE_COLOR = Color(180, 38, 38)
+    val DROP_MODE_TOLERANCE = 10
 
     val INV_TAB_BOUNDS = GameScreen.PRect(91.02, 36.07, 4.49, 8.56)
     val INV_OPEN_MAT = OpenCV.mat("api/osrs/inv_open.png")
@@ -53,7 +59,7 @@ object OSRSGameState {
     }
 
     fun isAtLobby(): Boolean {
-        return LOBBY_PLAY_BOUNDS.toMat().findFirstTemplate(LOBBY_PLAY_MAT to 0.95) != null
+        return LOBBY_PLAY_BOUNDS.toMat().findFirstTemplate(LOBBY_PLAY_MAT to 0.9) != null
     }
 
     fun isInGame(): Boolean {
@@ -61,7 +67,8 @@ object OSRSGameState {
     }
 
     fun isDropMode(): Boolean {
-        return DROP_MODE_BOUNDS.toMat().findFirstTemplate(DROP_MODE_MAT to 0.985) != null
+//        return DROP_MODE_BOUNDS.toMat().findFirstTemplate(DROP_MODE_MAT to 1.0) != null
+        return DROP_MODE_ARROW.find(DROP_MODE_COLOR, DROP_MODE_TOLERANCE).isNotEmpty()
     }
 
     fun isInvOpen(): Boolean {
@@ -69,11 +76,11 @@ object OSRSGameState {
     }
 
     fun isSettingsOpen(): Boolean {
-        return SETTINGS_TAB_BOUNDS.toMat().findFirstTemplate(SETTINGS_OPEN_MAT to 0.95) != null
+        return SETTINGS_TAB_BOUNDS.toMat().findFirstTemplate(SETTINGS_OPEN_MAT to 0.75) != null
     }
 
     private fun isPhoneSubOpen(): Boolean {
-        return PHONE_SUB_BOUNDS.toMat().findFirstTemplate(PHONE_SUB_OPEN_MAT to 0.95) != null
+        return PHONE_SUB_BOUNDS.toMat().findFirstTemplate(PHONE_SUB_OPEN_MAT to 0.9) != null
     }
 
     fun setDropMode(enabled: Boolean): Boolean {
@@ -198,5 +205,6 @@ object OSRSGameState {
     fun resetPerspective() {
         COMPASS_BOUNDS.click(8)
         swipeCamUp()
+        Thread.sleep(2500)
     }
 }

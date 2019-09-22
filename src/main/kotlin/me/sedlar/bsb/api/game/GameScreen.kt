@@ -183,6 +183,10 @@ class GameScreen {
         fun click() {
             click(toScreen())
         }
+
+        fun color(): Color {
+            return colorAt(px(px), py(py))
+        }
     }
 }
 

@@ -24,3 +24,7 @@ hs_err_pid*
 
 # keep certain files
 !src/main/resources/lib/opencv-341.jar
+
+# ignore project build
+build
+/.gradle/

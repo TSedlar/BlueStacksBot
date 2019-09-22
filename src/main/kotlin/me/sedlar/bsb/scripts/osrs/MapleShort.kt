@@ -2,8 +2,6 @@ package me.sedlar.bsb.scripts.osrs
 
 import javafx.scene.layout.Pane
 import me.sedlar.bsb.api.game.GameScreen
-import me.sedlar.bsb.api.game.click
-import me.sedlar.bsb.api.game.closestToPlayer
 import me.sedlar.bsb.api.game.osrs.OSRSGameState.setDropMode
 import me.sedlar.bsb.api.game.osrs.core.GameState
 import me.sedlar.bsb.api.game.osrs.core.Inventory
@@ -18,9 +16,9 @@ import java.awt.Rectangle
 import kotlin.random.Random.Default.nextInt
 import kotlin.random.Random.Default.nextLong
 
-class MapleShield : OSRSScript(
+class MapleShort : OSRSScript(
     author = "Static",
-    name = "Maple Shield"
+    name = "Maple Short"
 ) {
 
     private var knife: Mat? = null
@@ -35,9 +33,8 @@ class MapleShield : OSRSScript(
     private var itemSlots: ArrayList<GameScreen.PRect> = ArrayList()
     private var ifaceRect: Rectangle? = null
 
-    private val viewport = GameScreen.PRect(5.67, 6.38, 62.99, 84.88)
     private val player = GameScreen.PRect(44.81, 37.34, 6.63, 14.57)
-    private val maker = GameScreen.PRect(44.92, 8.01, 11.23, 16.21)
+    private val maker = GameScreen.PRect(12.3, 8.01, 11.02, 16.03)
 
     private val trees = arrayOf(
         GameScreen.PRect(53.69, 42.44, 3.96, 7.29),
@@ -50,8 +47,8 @@ class MapleShield : OSRSScript(
     override fun onStart() {
         knife = OpenCV.mat("scripts/maple_shield/knife.png")
         log = OpenCV.mat("scripts/maple_shield/log.png")
-        item = OpenCV.mat("scripts/maple_shield/shield.png")
-        iface = OpenCV.mat("scripts/maple_shield/shield_iface.png")
+        item = OpenCV.mat("scripts/maple_shield/short.png")
+        iface = OpenCV.mat("scripts/maple_shield/short_iface.png")
         maple = Color(82, 32, 0)
     }
 
@@ -83,7 +80,7 @@ class MapleShield : OSRSScript(
     override fun loop(): Int {
         val localKnife = Inventory.findAllSlots(knife!! to 0.55)
         val localLog = Inventory.findAllSlots(log!! to 0.55)
-        val localItem = Inventory.findAllSlots(item!! to 0.8)
+        val localItem = Inventory.findAllSlots(item!! to 0.65)
 
         knifeSlots.clear()
         knifeSlots.addAll(localKnife)
@@ -116,20 +113,6 @@ class MapleShield : OSRSScript(
         }
 
         return nextInt(50, 75)
-    }
-
-    private fun chopTree(trees: List<Rectangle>) {
-        if (GameState.setDropMode(false)) {
-            trees.closestToPlayer(120.0)?.let {
-                it.click(10)
-                // Check if chopped tree
-                if (player.checkForChanges(100, 50, 0.35) >= 0.5) {
-                    Timing.waitFor(nextLong(15000, 17500)) {
-                        Inventory.isFull()
-                    }
-                }
-            }
-        }
     }
 
     private fun chopTree() {
@@ -167,7 +150,7 @@ class MapleShield : OSRSScript(
                 maker.click(10)
                 Thread.sleep(2000)
                 Timing.waitFor(45000L) {
-                    Inventory.findAllSlots(log!! to 0.55).count() < 2
+                    Inventory.findAllSlots(log!! to 0.55).count() == 0
                 }
             } else if (knives.isNotEmpty() && logs.isNotEmpty()) {
                 knives.first().click(10)

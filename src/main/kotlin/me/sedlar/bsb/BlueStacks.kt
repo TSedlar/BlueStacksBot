@@ -128,14 +128,14 @@ object BlueStacks {
     }
 
     fun click(x: Int, y: Int) {
-//        doSafeAction {
-//            val position = (y shl 16) or (x and 0xFFFF)
-//            val w = WinDef.WPARAM(0)
-//            val l = WinDef.LPARAM(position.toLong())
-//            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
-//            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
-//        }
-        adbClick(x, y) // lets experiment only using adb for now
+        doSafeAction {
+            val position = (y shl 16) or (x and 0xFFFF)
+            val w = WinDef.WPARAM(0)
+            val l = WinDef.LPARAM(position.toLong())
+            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONDOWN, w, l)
+            User32.INSTANCE.SendMessage(winHandle, WM_LBUTTONUP, w, l)
+        }
+//        adbClick(x, y) // lets experiment only using adb for now
     }
 
     fun adbClick(x: Int, y: Int) {
