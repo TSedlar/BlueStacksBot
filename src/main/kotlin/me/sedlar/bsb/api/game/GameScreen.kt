@@ -144,10 +144,6 @@ class GameScreen {
             }
             return (times - stillness).toDouble() / times.toDouble()
         }
-
-        fun checkFrameDivergence(original: Mat, frame: Mat, confidence: Double) {
-
-        }
     }
 
     class PRect(px: Double, py: Double, private val pw: Double, private val ph: Double) : ScreenRegion(px, py) {

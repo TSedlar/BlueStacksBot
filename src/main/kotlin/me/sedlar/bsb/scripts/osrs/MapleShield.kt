@@ -2,8 +2,6 @@ package me.sedlar.bsb.scripts.osrs
 
 import javafx.scene.layout.Pane
 import me.sedlar.bsb.api.game.GameScreen
-import me.sedlar.bsb.api.game.click
-import me.sedlar.bsb.api.game.closestToPlayer
 import me.sedlar.bsb.api.game.osrs.OSRSGameState.setDropMode
 import me.sedlar.bsb.api.game.osrs.core.GameState
 import me.sedlar.bsb.api.game.osrs.core.Inventory
@@ -35,7 +33,6 @@ class MapleShield : OSRSScript(
     private var itemSlots: ArrayList<GameScreen.PRect> = ArrayList()
     private var ifaceRect: Rectangle? = null
 
-    private val viewport = GameScreen.PRect(5.67, 6.38, 62.99, 84.88)
     private val player = GameScreen.PRect(44.81, 37.34, 6.63, 14.57)
     private val maker = GameScreen.PRect(44.92, 8.01, 11.23, 16.21)
 
@@ -116,20 +113,6 @@ class MapleShield : OSRSScript(
         }
 
         return nextInt(50, 75)
-    }
-
-    private fun chopTree(trees: List<Rectangle>) {
-        if (GameState.setDropMode(false)) {
-            trees.closestToPlayer(120.0)?.let {
-                it.click(10)
-                // Check if chopped tree
-                if (player.checkForChanges(100, 50, 0.35) >= 0.5) {
-                    Timing.waitFor(nextLong(15000, 17500)) {
-                        Inventory.isFull()
-                    }
-                }
-            }
-        }
     }
 
     private fun chopTree() {

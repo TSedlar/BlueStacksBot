@@ -26,5 +26,6 @@ hs_err_pid*
 !src/main/resources/lib/opencv-341.jar
 
 # ignore project build
-build
+/build/
 /.gradle/
+/out/
