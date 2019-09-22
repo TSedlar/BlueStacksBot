@@ -87,16 +87,16 @@ object OSRSGameState {
         if (enabled) {
             return if (!isDropMode()) {
                 DROP_MODE_BOUNDS.click(5)
-                Thread.sleep(nextLong(750, 1000))
-                true
+                Thread.sleep(nextLong(1250, 1500))
+                isDropMode()
             } else {
                 true
             }
         } else {
             return if (isDropMode()) {
                 DROP_MODE_BOUNDS.click(5)
-                Thread.sleep(nextLong(750, 1000))
-                true
+                Thread.sleep(nextLong(1250, 1500))
+                !isDropMode()
             } else {
                 true
             }

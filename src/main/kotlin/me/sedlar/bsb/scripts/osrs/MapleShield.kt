@@ -122,11 +122,9 @@ class MapleShield : OSRSScript(
                     tree.click(10)
                     val change = player.checkForChanges(100, 50, 0.35)
                     if (change >= 0.1) {
-                        Timing.waitFor(nextLong(15000, 17500)) {
-                            Inventory.isFull()
+                        Timing.waitFor(60000) {
+                            Inventory.isFull() || tree.find(maple!!, mapleTolerance).isEmpty()
                         }
-                    } else {
-                        println(change)
                     }
                     break
                 }
